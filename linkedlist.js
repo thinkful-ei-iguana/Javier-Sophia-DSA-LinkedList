@@ -7,91 +7,83 @@ class _Node {
 
 class LinkedList {
     constructor() {
-        this.head = null;
+      this.head = null;
     }
-    //insert first
-    insertFirst(item) {
-        this.head = new _Node(item, this.head)
-    }
-
-    insertLast(item) {
-        if (this.head === null) {
-            this.insertFirst(item);
-        }
-        else {
-            let tempNode = this.head;
-            while (tempNode.next !== null) {
-                tempNode.next = new _Node(item, null)
-            }
-        }
-    }
+  
     find(item) {
-        //start at the head
+      if (!this.head) {
+        return null;
+      }
+      let currNode = this.head;
+  
+      while (currNode.value !== item) {
+        if (currNode.next !== null) {
+          return null; //couldn't find item
+        } else {
+          currNode = this.next;
+        }
+      }
+      
+      return currNode;
+    }
+  
+    insertFirst(value) {
+      //point to the head since it is either null or the first element
+      this.head = new _Node(value, this.head);
+    }
+  
+    insertLast(value) {
+      if (this.head === null) {
+        this.insertFirst(value);
+      } else {
         let currNode = this.head;
-
-        //if the list is empty
-        if (!this.head) {
-            return null;
+        while (currNode.next !== null) {
+          currNode = currNode.next;
         }
-        while (currNode.value !== item) {
-            /* return null i fits the end of the list
-            and the item is not on the list*/
-            if (currNode.next === null) {
-                return null;
-            } else {
-            //otherwise keep looking
-            currNode = currNode.next;
-        }
+        //set the last node's next
+        currNode.next = new _Node(value, null);
+      }
     }
-        //found it
-        return currNode;
-    }
-
+  
     remove(item) {
-        //if list is empty
-        if (!this.head) {
-            return null
-        }
-        //if the node to be removed is head, make the next node head
-        if (this.head.value === item) {
-            this.head = this.head.next;
-            return;
-        }
-
-        //start at the head
-        let currNode = this.head;
-
-        //keep track of previous
-        let previousNode = this.head
-
-        while ((currNode !== null) && (currNode.value !== item)) {
-            previousNode = currNode;
-            currNode = currNode.next;
-        }
-        if (currNode === null) {
-            console.log('item not found')
-            return;
-        }
+      if (!this.head) {
+        return null;
+      }
+      //if it is the first one
+      if (this.head.value === item) {
+        this.head = this.head.next;
+        return;
+      }
+      //all others
+      let currNode = this.head;
+      let previousNode = this.head;
+  
+      while ((currNode !== null) && (currNode.value !== item)) {
+        previousNode = currNode;
+        currNode = currNode.next;
+      }
+      if (currNode === null) {
+        console.log("Item not found");
+        return;
+      } else {
         previousNode.next = currNode.next;
+      }
     }
-
-    
-
-}
+  }
 
 
 
 
 function main(){
-    let sll = new LinkedList()
+    const sll = new LinkedList()
 
     sll.insertFirst("Apollo")
-    //sll.insertFirst("Boomer")
-   // sll.insertLast("helo")
-    // sll.insertLast("Husker")
-    // sll.insertFirst("Starbuck")
-    // sll.insertFirst("Tauhida")
-
+    sll.insertLast("Boomer")
+    sll.insertLast("helo")
+    sll.insertLast("Husker")
+    sll.insertLast("Starbuck")
+    sll.insertLast("Tauhida")
+    sll.remove("squirrel")
     console.log(sll)
 }
 
