@@ -38,11 +38,11 @@ class LinkedList {
             and the item is not on the list*/
             if (currNode.next === null) {
                 return null;
-            }
-        } else {
+            } else {
             //otherwise keep looking
             currNode = currNode.next;
         }
+    }
         //found it
         return currNode;
     }
@@ -75,9 +75,24 @@ class LinkedList {
         previousNode.next = currNode.next;
     }
 
-
+    
 
 }
 
-let ll = new LinkedList()
-ll.insertFirst(5)
+
+
+
+function main(){
+    let sll = new LinkedList()
+
+    sll.insertFirst("Apollo")
+    //sll.insertFirst("Boomer")
+   // sll.insertLast("helo")
+    // sll.insertLast("Husker")
+    // sll.insertFirst("Starbuck")
+    // sll.insertFirst("Tauhida")
+
+    console.log(sll)
+}
+
+main()
