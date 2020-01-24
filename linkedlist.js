@@ -84,7 +84,6 @@ function main(){
     sll.insertLast("Starbuck")
     sll.insertLast("Tauhida")
     sll.remove("squirrel")
-    console.log(sll)
-}
+    console.log(JSON.stringify(sll));}
 
 main()
